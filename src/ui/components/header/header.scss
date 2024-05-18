@@ -1,0 +1,26 @@
+@use '../../styles/abstracts/variables' as v;
+.header {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em 1em;
+    background-color: v.$primary-color;
+
+
+&-logo{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5em;
+}
+
+
+    nav{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.8em;
+    }
+
+}

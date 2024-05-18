@@ -1,0 +1,134 @@
+@use "../ui/styles/abstracts/variables" as v;
+
+.you-welcome {
+  display: flex;
+  flex-direction: column;
+  gap: 5em;
+
+  height: 100vh;
+
+  &-item {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    .item-body {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      //align-items: center;
+    }
+  }
+
+  &-text {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1 1 45%;
+    gap: 1em;
+    padding: 3em;
+
+    .title {
+      font-size: 7em;
+      font-weight: 700;
+    }
+  }
+  &-image {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 0 50%;
+  }
+}
+
+.about {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  margin: 2em;
+
+  .content {
+    width: 60%;
+    outline-width: 3px;
+    .title {
+      font-size: 6rem;
+      line-height: 0.5;
+      span {
+        font-size: 3rem;
+      }
+    }
+
+    .text {
+      font-size: 3rem;
+    }
+  }
+}
+
+.carrousel {
+  overscroll-behavior: none;
+  width: 600%;
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.activity-item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3em;
+  background-color: beige;
+
+  .item-body{
+    width: 55%;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    gap: 2em;
+  
+  }
+
+.branding-svg {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 350ms ease-in-out;
+  svg {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    fill: v.$primary-color;
+    transition: all 250ms ease-in-out;
+    cursor: pointer;
+  }
+  &:hover {
+    svg {
+      fill: v.$secondary-color;
+    }
+    &::after {
+      content: "Découvrir";
+      position: absolute;
+      top: 50%;
+      right: -30%;
+      transform: translate(30%, -50%);
+      font-size: 2rem;
+      color: antiquewhite;
+      background-color: v.$primary-color;
+      padding: 0.5em;
+      border-radius: 0.5em;
+      cursor: pointer;
+    }
+  }
+}
+}
