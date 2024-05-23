@@ -4,11 +4,8 @@ import Link from "next/link";
 import ScrollServices from "@/ui/components/scrollServices";
 import BlobImg from "@/ui/components/blobImage";
 import { LogoEscalade } from "@/ui/svg/branding";
+ 
 
-import ActivityCard from "@/ui/components/activityCard";
-
-import "./home.scss";
-import "@/ui/styles/main.scss";
 
 
 export default function Home() {
@@ -43,10 +40,12 @@ export default function Home() {
         <article className="activity-item">
           <h2>Nos activités</h2>
           <div className=" item-body ">
-            <div className="branding-svg">
+         
+              <Link href="/activites/escalade" className="branding-svg">
               <LogoEscalade />
               <h3>Escalade</h3>
-            </div>
+              </Link>
+  
             <div className="branding-svg">
               <LogoEscalade />
               <h3>Canyoning</h3>
@@ -63,7 +62,6 @@ export default function Home() {
         </article>
       </section>
 
-      <div>Vous cherchez des sensations ? </div>
 
       <ScrollServices backgroundColor="black" />
 

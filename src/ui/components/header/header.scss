@@ -1,26 +1,59 @@
-@use '../../styles/abstracts/variables' as v;
+@use "../../styles/abstracts/variables" as v;
 .header {
-    box-sizing: border-box;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5em 1em;
-    background-color: v.$primary-color;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em 1em;
+  background-color: v.$primary-color;
 
-
-&-logo{
+  &-logo {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 0.5em;
-}
-
-
-    nav{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 0.8em;
+    text-decoration: none;
+    h1 {
+      color: white;
     }
+  }
 
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 4em;
+    .nav-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.2em;
+      a {
+        text-decoration: none;
+        color: white;
+        font-size: large;
+        transition: all 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        &.active {
+          font-weight: bold;
+  
+          &::after {
+            transform: scaleX(1);
+          }
+        }
+        &:hover::after {
+          transform: scaleX(1);
+        }
+
+        &::after {
+          content: " ";
+          display: block;
+          width: 100%;
+          border-bottom: 2px solid white;
+          margin-top: 0.4em;
+          transform: scaleX(0);
+          transform-origin: (0% 50%);
+          transition: all 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+      }
+    }
+  }
 }
