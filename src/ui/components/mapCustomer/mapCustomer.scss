@@ -1,0 +1,24 @@
+@use '../../styles/abstracts/variables' as v;
+@use '../../styles/abstracts/mixins' as m;
+
+
+.map-customer{
+    aspect-ratio: 1/2;
+    box-sizing: border-box;
+    border-radius: 0.8em;
+    min-width: 350px;
+    min-height: 700px;
+    height: 100vh;
+    width: 100%;
+    max-width: 650px;
+    max-height: 700px;
+
+    @include m.shadow;
+
+    &_tooltip{
+        box-sizing: border-box;
+        display: block;
+        width: 200px;
+        height: auto;
+    }
+}

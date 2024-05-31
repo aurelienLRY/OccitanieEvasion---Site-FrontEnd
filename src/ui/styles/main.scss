@@ -20,7 +20,7 @@ html {
   flex-direction: column;
   position: relative;
 
-  @include m.media(tablet) {
+  @include m.breakpoint(tablet) {
     align-items: center;
     gap: 0.5em;
   }
@@ -28,9 +28,9 @@ html {
 main {
   box-sizing: border-box;
   min-height: 88.5vh;
-  padding: 0.5em 0.7em;
 
-  @include m.media(tablet) {
+
+  @include m.breakpoint(tablet) {
     box-sizing: border-box;
     padding: 0.5em 0.5em;
   }

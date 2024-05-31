@@ -2,7 +2,7 @@
 @use'function' as *;
 
 //BREACKPOINTS
-@mixin media($breakpoint) {
+@mixin breakpoint($breakpoint) {
   @if map-has-key($breakpoints, $breakpoint) {
     @media (max-width: map-get($breakpoints, $breakpoint)) {
       @content;
@@ -11,16 +11,10 @@
     @error "Breakpoint '#{$breakpoint}' not found in $breakpoints map.";
   }
 }
-// TYPOGRAPHIES
-@mixin font-roboto($size: 17, $weight: 300) {
-  font-family: Roboto !important;
-  font-size: rem($size);
-  font-weight: $weight;
-  font-style: normal;
-  line-height: normal;
-  color: $text-color;
-}
 
+@mixin shadow() {
+  box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.3);
+}
 
 //colors
 @mixin gradient($direction, $list) { 

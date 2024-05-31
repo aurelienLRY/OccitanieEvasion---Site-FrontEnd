@@ -16,7 +16,7 @@ form{
         align-items: center;
         gap: 0.5em;
 
-        @include m.media('tablet') {
+        @include m.breakpoint('tablet') {
             flex-direction: column;
             gap: 0.5em;
         }

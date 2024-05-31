@@ -1,0 +1,12 @@
+@use "../../../ui/styles/abstracts/variables" as v;
+.cls-1 {
+  fill: white;
+}
+
+.cls-1, .cls-2 {
+  stroke-width: 10px;
+}
+
+.cls-2 {
+  fill: transparent;
+}

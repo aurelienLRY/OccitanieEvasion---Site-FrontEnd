@@ -11,7 +11,7 @@ a.btn {
 
 .btn {
   appearance: none;
-  background-color: v.$primary-color-dark-alpha;
+  background-color: v.$primary-color;
   color: white;
   padding: 0.5em 1em;
   border-radius: 0.3em;
@@ -20,8 +20,8 @@ a.btn {
   transition: all 250ms ease-in-out;
 
   &:hover {
-    background-color: v.$primary-color-light-alpha;
-    transform: scale(1.05);
+    background-color: v.$primary-color-light;
+   //transform: scale(1.05);
   }
 
   &.small {

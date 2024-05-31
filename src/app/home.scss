@@ -1,4 +1,7 @@
 @use "../ui/styles/abstracts/variables" as v;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .you-welcome {
   display: flex;
@@ -106,8 +109,8 @@
   transition: all 350ms ease-in-out;
   svg {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 250px;
+    height: 250px;
     fill: v.$primary-color;
     transition: all 250ms ease-in-out;
     cursor: pointer;

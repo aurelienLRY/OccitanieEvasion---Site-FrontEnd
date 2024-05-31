@@ -7,6 +7,7 @@ type Props = {
   width: number;
   height: number;
   title: string;
+  className: string;
   children: React.ReactNode;
 };
 
@@ -16,10 +17,11 @@ function ActivityCard({
   width,
   height,
   title,
+  className, 
   children,
 }: Props) {
   return (
-    <div className="activity-card" data-testid="activity-card">
+    <div className={`activity-card ${className}`} data-testid="activity-card">
       <div className="activity-card_box">
         <Image
           src={url}

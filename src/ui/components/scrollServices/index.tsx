@@ -67,7 +67,7 @@ function ScrollServices({backgroundColor} : props) {
                 <Link href="/" className="btn-outline-white">
                   Réserver
                 </Link>
-                <Link href="/" className="btn-outline-white secondary">
+                <Link href="/activites/escalade" className="btn-outline-white secondary">
                   En savoir plus
                 </Link>
               </div>

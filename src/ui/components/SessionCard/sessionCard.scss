@@ -1,0 +1,25 @@
+@use "../../../ui/styles/abstracts/variables" as v;
+@use "../../../ui/styles/abstracts/mixins" as m;
+.session-card{ 
+    box-sizing: border-box;
+    width: 800px;
+    //max-width: 950px;
+    padding: 0.5em;
+   
+    background-color:v.$secondary-color-900;
+   
+    border-radius: 0.8rem;
+
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+
+    @include m.shadow();
+}
+
+svg.session-card_svg{
+    width: 50px !important;
+    height: 50px !important;
+    fill: v.$primary-color;
+ 
+}

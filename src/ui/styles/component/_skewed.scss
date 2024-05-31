@@ -1,0 +1,103 @@
+.skewedRight {
+  width: 100%;
+  height: 100px;
+  background: #ffffff;
+  z-index: 0;
+  transform: skewY(3deg);
+  transform-origin: top right;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: #ffffff7a;
+    z-index: 0;
+    transform: skewY(0deg);
+    transform-origin: top right;
+  }
+}
+
+.skewedLeft {
+  width: 100%;
+  height: 70px;
+  background: #ffffff;
+  z-index: 0;
+  transform: skewY(-3deg);
+  transform-origin: top left;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: #ffffff7a;
+    z-index: 0;
+    transform: skewY(0deg);
+    transform-origin: top left;
+  }
+}
+
+
+.skewed{
+  position: relative;
+  padding-top: 100px;
+  padding-bottom: 100px;
+
+  &.right::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100px;
+    background: #ffffff;
+    z-index: 0;
+    transform: skewY(3deg);
+    transform-origin: top right;
+  }
+
+  &.left::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: #ffffff;
+    z-index: 0;
+    transform: skewY(-3deg);
+    transform-origin: top left;
+  }
+
+  &.bottom-left ::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: #ffffff;
+    z-index: 0;
+    transform: skewY(3deg);
+    transform-origin: bottom left;
+  }
+
+  &.bottom-right ::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100px;
+    background: #ffffff;
+    z-index: 0;
+    transform: skewY(-3deg);
+    transform-origin: bottom right;
+
+  }
+}
