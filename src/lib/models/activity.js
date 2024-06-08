@@ -43,4 +43,4 @@ const activitySchema = new Schema({
 
 const activity = models.activity || model("activity", activitySchema);
 
-module.exports = activity;
+export default activity;

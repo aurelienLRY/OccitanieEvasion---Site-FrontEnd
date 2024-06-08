@@ -1,6 +1,6 @@
+'use client'; 
 import React from "react";
 import Image from "next/image";
-import { BorderBeam } from "../magicui/border-beam";
 
 /*services*/
 import { dateToFr, formatHours } from "@/lib/data/services/date";
@@ -21,7 +21,7 @@ type item = {
 
 function SessionCard({ item }: { item: item }) {
 
-  console.log("SessionCard item",item);
+
 
 
   return (

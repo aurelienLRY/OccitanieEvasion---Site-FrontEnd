@@ -1,4 +1,4 @@
-
+'use client' ; 
 import "./formulas.scss";
 
 type Props = {

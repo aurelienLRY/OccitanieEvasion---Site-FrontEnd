@@ -43,7 +43,7 @@ export default function Home() {
           <div className=" item-body ">
          
               <Link href="/activites/escalade" className="branding-svg">
-              <IconEscalade />
+              <IconEscalade className='hover' />
               </Link>
   
             <div className="branding-svg">
@@ -51,7 +51,7 @@ export default function Home() {
               <h3>Canyoning</h3>
             </div>
             <div className="branding-svg">
-              <IconSpeleo />
+              <IconSpeleo className=" hover"/>
             </div>
             <div className="branding-svg">
               <LogoEscalade />

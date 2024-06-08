@@ -3,22 +3,26 @@
 
 
 .map-customer{
-    aspect-ratio: 1/2;
+    //aspect-ratio: 1/2;
     box-sizing: border-box;
-    border-radius: 0.8em;
+    border-radius: 0.8em 0em 0em 0.8em ;
     min-width: 350px;
-    min-height: 700px;
-    height: 100vh;
+    min-height: 600px;
+    height: 120%;
     width: 100%;
-    max-width: 650px;
-    max-height: 700px;
+    //max-width: 650px;
+    //max-height: 700px;
 
     @include m.shadow;
 
     &_tooltip{
-        box-sizing: border-box;
+        box-sizing: border-box;     
+        padding: 0.5em;
+        
         display: block;
         width: 200px;
         height: auto;
+   
+        border-radius: 1em;
     }
 }

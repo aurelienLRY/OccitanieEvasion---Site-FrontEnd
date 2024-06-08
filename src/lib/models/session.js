@@ -14,4 +14,4 @@ const sessionSchema = new Schema({
 
 const session = models.session || model('session', sessionSchema);
 
-module.exports = session;
+export default session;

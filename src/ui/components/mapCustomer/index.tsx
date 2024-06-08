@@ -1,76 +1,87 @@
+// /src/ui/components/mapCustomer/index.tsx
+'use client'
+import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { Icon } from "leaflet";
 import "./mapCustomer.scss";
-import {Icon} from "leaflet";
+import Image from "next/image";
 
-import { MarkerEscalade } from "@/ui/svg";
-
-/* exemple de props attendu */
-/*
-{
-  "_id": "66420191191d2f9f5c027d1c",
-  "name": "Gorges du banquet (Tarn)",
-  "description": "",
-  "gpsCoordinates": "43.51255482178179, 2.473309067273864",
-  "practicedActivities": [
-      {
-          "activityName": "Randonée Aquatique",
-          "activityId": "6641ffca191d2f9f5c027423",
-          "_id": "66420191191d2f9f5c027d1d"
-      }
-  ],
-  "half_day": true,
-  "full_day": true,
-  "max_OfPeople": 10,
-  "min_OfPeople": 2,
-  "meetingPoint": "neant",
-  "estimatedDuration": "3h30",
-  "__v": 0
-}*/
-
-export default function MapCustomer({ spots } ) {
-    // Centrer la carte sur la moyenne des spots  
-    const moyennePosition = spots.reduce((acc, spot) => {
-        const gps = spot.gpsCoordinates.split(",");
-        return [acc[0] + parseFloat(gps[0]) / spots.length, acc[1] + parseFloat(gps[1]) / spots.length];
-    }, [0, 0]);
-
-  return (
-    <MapContainer
-      center={moyennePosition as [number, number]}
-      zoom={10}
-      className="map-customer"
-    >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        {
-            spots.map((position, index) => {
-                return (
-                    <Marker key={index} position={convertGpsCoordinates(position.gpsCoordinates)} icon={markerEscalade}>
-                  <Tooltip >
-                    <div className="map-customer_tooltip">
-                    <h3>{position.name}</h3>
-                    <p>{position.description}</p>
-                    </div>
-                  </Tooltip>
-                    </Marker>
-                );
-            })  
-
-        }
-    
-    </MapContainer>
-  );
-}
-
+type spot = {
+  _id: string;
+  name: string;
+  description: string;
+  gpsCoordinates: string;
+  practicedActivities: Array<{ activityName: string; activityId: string }>;
+  half_day: boolean;
+  full_day: boolean;
+  max_OfPeople: number;
+  min_OfPeople: number;
+  meetingPoint: string;
+  estimatedDuration: string;
+  __v: number;
+};
 
 const markerEscalade = new Icon({
   iconUrl: "/icon/logo-escalade_markerEscalade.svg",
-  iconSize: [100,100],
+  iconSize: [100, 100],
   iconAnchor: [50, 90],
 });
 
-//  function qui convertie "gpsCoordinates": "43.51255482178179, 2.473309067273864",  en [number, number]
-  function convertGpsCoordinates(gpsCoordinates: string) {
-    const gps = gpsCoordinates.split(",");
-     return [parseFloat(gps[0]), parseFloat(gps[1])];
+function convertGpsCoordinates(gpsCoordinates: string): [number, number] {
+  const gps = gpsCoordinates.split(",");
+  return [parseFloat(gps[0]), parseFloat(gps[1])];
+}
+
+const centerMapContainer = (spots: Array<spot>): [number, number] => {
+  if (spots.length === 0) return [0, 0];
+
+  const totalCoordinates = spots.reduce(
+    (acc, spot) => {
+      const [lat, lng] = convertGpsCoordinates(spot.gpsCoordinates);
+      acc.lat += lat;
+      acc.lng += lng;
+      return acc;
+    },
+    { lat: 0, lng: 0 }
+  );
+
+  const centerLat = totalCoordinates.lat / spots.length;
+  const centerLng = totalCoordinates.lng / spots.length;
+
+  return [centerLat, centerLng];
+};
+
+export default function MapCustomer({ spots }: { spots: [] }) {
+  const [center, setCenter] = useState<[number, number]>([0, 0]);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+    setCenter(centerMapContainer(spots));
+  }, [spots]);
+
+  if (!isClient) {
+    return null;
   }
+
+  return (
+    <MapContainer center={center} zoom={10} className="map-customer">
+      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      {spots.map((spot) => (
+        <Marker
+          key={spot._id}
+          position={convertGpsCoordinates(spot.gpsCoordinates)}
+          icon={markerEscalade}
+        >
+          <Tooltip>
+            <div className="map-customer_tooltip">
+              <h3>{spot.name}</h3>
+              <p>{spot.description}</p>
+            </div>
+          </Tooltip>
+        </Marker>
+      ))}
+    </MapContainer>
+  );
+}

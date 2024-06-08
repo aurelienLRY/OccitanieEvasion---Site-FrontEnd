@@ -55,4 +55,4 @@ const spotSchema = new Schema({
   },
 });
 const spots = models.spots || model("spots", spotSchema);
-module.exports =  spots;
+export default spots;

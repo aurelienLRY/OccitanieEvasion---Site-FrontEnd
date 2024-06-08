@@ -1,6 +1,6 @@
-import { Providers } from './Providers';
+import { Providers } from './providers';
 import Header from '@/ui/components/header';
-import '../../globals.css'
+import '@/app/globals.css'
 
 export default function RootLayout({
   children,
@@ -10,8 +10,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body>
-        <Header/>
-        
+        <Header />
         <Providers>{children}</Providers>
       </body>
     </html>

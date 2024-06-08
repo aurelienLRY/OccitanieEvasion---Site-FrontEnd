@@ -4,9 +4,9 @@ import localFont from "next/font/local"
 import Header from "@/ui/components/header";
 
 /*style*/
-import './globals.css';
-import "../ui/styles/main.scss";
-import "./home.scss";
+import '@/app/globals.css';
+import "@/ui/styles/main.scss";
+import "@/app/home.scss";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });

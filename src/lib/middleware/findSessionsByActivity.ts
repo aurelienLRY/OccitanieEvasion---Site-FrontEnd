@@ -1,16 +1,16 @@
 "use server"; 
-import connectDB from "../config/database";
-import { disconnectDB } from "../config/database";
-import  Activity  from "../models/activity";
-import session from "../models/session";
-import spot from "../models/spots";
+import  Activity  from "@/lib/models/activity";
+import session from "@/lib/models/session";
+import spot from "@/lib/models/spots";
 
 export default async function findSessionsByActivity(activity: string) {
-  await connectDB();
-const activities : Array<object> = await Activity.find();
+const activities : Array<object> = await Activity.find().lean();
+
   const thisActivity :{ name : string } = activities.find(
     (act: { name: string }) => act.name === activity
   );
+
+  
   if (!thisActivity) {
     return null;
   }
@@ -37,7 +37,6 @@ const newSessions : Array<object> = [];
     }
   });
 
-await disconnectDB();
   return newSessions;
 }
 
