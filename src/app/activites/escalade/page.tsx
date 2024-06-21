@@ -5,7 +5,6 @@ import getSpots from "@/lib/actions/getSpots";
 import { connectDB, disconnectDB } from "@/lib/config/database";
 
 /*components*/
-import SessionCard from "@/ui/components/SessionCard";
 import SgvEscalade from "@/ui/components/svgEscaladeGrandVoie";
 import MapCustomer from "@/ui/components/mapCustomer";
 import FormulasCard from "@/ui/components/fomulasCard";
@@ -15,19 +14,32 @@ import CarouselSession from "@/ui/components/carrouselSessionCard";
 /*styles*/
 import "./escalade.scss";
 import { BackgroundSvg, TachClipPath } from "@/ui/svg";
+import { ISpots, IActivity, ISessions } from "@/lib/models/types";
+
+
+
+
+ const fetchData = async () => {
+      await connectDB(); // Connexion à la base de données
+      const spots: ISpots = await getSpots() as ISpots;
+      const sessions : ISessions = await findSessionsByActivity("Escalade") as ISessions;
+      const filteredSpots = spots.filter(
+        (spot) =>
+          spot.practicedActivities &&
+          Array.isArray(spot.practicedActivities) &&
+          spot.practicedActivities.some(
+            (item) => item && item.activityName === "Escalade"
+          )
+      );
+      return {sessions , filteredSpots}
+    };
+
 
 async function EscaladeActivity() {
   try {
-    await connectDB(); // Connexion à la base de données
-    const spots = await getSpots();
-    const sessions = await findSessionsByActivity("Escalade");
-    const filteredSpots = spots.filter((spot) =>
-      spot.practicedActivities.some(
-        (activity) => activity.activityName === "Escalade"
-      )
-    );
-
-    return (
+    
+  const {sessions , filteredSpots } =  await fetchData();
+       return (
       <main className="escalade-activity">
         <ParaBanner />
         <section className="introduction-activity">
@@ -63,19 +75,24 @@ async function EscaladeActivity() {
               ))}
             </div>
           </article>
-          
+
           <article className="booking">
             <TachClipPath className="clip-path">
-            <h2>Profitez de date déja programmé </h2>
-            <div className="activity-booking_card"> 
-            <CarouselSession sessions={sessions} />
-            </div>
-           </TachClipPath>
+              <h2>Profitez de date déjà programmé </h2>
+              <div className="activity-booking_card">
+                {sessions ? (
+                  <CarouselSession sessions={sessions} />
+                ) : (
+                  <>
+                    <p> Aucune session n&apos;est programmée pour le moment </p>
+                    <p> Réservez en une! </p>
+                  </>
+                )}
+              </div>
+            </TachClipPath>
           </article>
         </section>
-        <section className="activity-tof">
-
-        </section>
+        <section className="activity-tof"></section>
         <section className="map-activity">
           <div className="map-activity_content">
             <h2>Map</h2>
@@ -95,7 +112,7 @@ async function EscaladeActivity() {
   } catch (error) {
     console.error("Failed to load data:", error);
   } finally {
-    await disconnectDB(); // Déconnexion de la base de données
+    disconnectDB(); // Déconnexion de la base de données
   }
 }
 

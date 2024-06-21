@@ -1,51 +1,63 @@
-'use client';   
-import { useState, useEffect } from 'react';
-import SessionCard from '@/ui/components/SessionCard';
+"use client";
+import { useCallback, useEffect, useState } from "react";
+import SessionCard from "@/ui/components/SessionCard";
+
+import { ISessions } from "@/lib/models/types"; 
 
 /*styles*/
-import './carouselSessionCard.scss';
+import "./carouselSessionCard.scss";
 
-const CarouselSession = ({ sessions } : { sessions : Array<object> } ) => {
+
+const CarouselSession = ({ sessions } : {sessions : ISessions}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [intervalId, setIntervalId] = useState(null);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
-  const nextIndex = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 3) % sessions.length);
-  };
+  const nextIndex = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex + 2) % sessions.length);
+  }, [sessions.length]);
 
-  const prevIndex = () => {
+  const prevIndex = useCallback(() => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? sessions.length - 3 : prevIndex - 3
+      prevIndex === 0 ? sessions.length - 2 : prevIndex - 2
     );
-  };
+  }, [sessions.length]);
 
-  const resetInterval = () => {
-    clearInterval(intervalId);
+  const resetInterval = useCallback(() => {
+    if (intervalId) clearInterval(intervalId);
     const newIntervalId = setInterval(nextIndex, 5000);
     setIntervalId(newIntervalId);
-  };
-
-  useEffect(() => {
-    const newIntervalId = setInterval(nextIndex, 5000);
-    setIntervalId(newIntervalId);
-    return () => clearInterval(newIntervalId);
-  }, []);
+  }, [intervalId, nextIndex]);
 
   useEffect(() => {
     resetInterval();
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resetInterval]);
+
+  useEffect(() => {
+    resetInterval();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex]);
 
   return (
     <div className="carousel-sessionCard">
-      <button onClick={prevIndex} className='btnPrev'>Previous</button>
+      <button onClick={prevIndex} className="btnPrev">
+        Previous
+      </button>
       <div className="activity-session_card">
-        {sessions.slice(currentIndex, currentIndex + 3).map((session, index) => (
-          <SessionCard item={session} key={`sessionCard-${index}`} />
-        ))}
+        {sessions 
+          .slice(currentIndex, currentIndex + 2)
+          .map((session, index) => (
+            <SessionCard item={session} key={`sessionCard-${index}`} />
+          ))}
       </div>
-      <button onClick={nextIndex} className='btnNext'>Next</button>
+      <button onClick={nextIndex} className="btnNext">
+        Next
+      </button>
     </div>
   );
-};
+}
 
 export default CarouselSession;

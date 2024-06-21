@@ -1,6 +1,7 @@
 'use client'; 
 import React from "react";
 import Image from "next/image";
+import { ISessions , ISession} from "@/lib/models/types";
 
 /*services*/
 import { dateToFr, formatHours } from "@/lib/data/services/date";
@@ -9,20 +10,8 @@ import "./sessionCard.scss";
 /*svg*/
 import { IconEscalade,  IconSpeleo } from "@/ui/svg";
 
-type item = {
-  date: string;
-  startTime: string;
-  endTime: string;
-  activity: string;
-  spot: string;
-  placesMax: number;
-  placesReserved: number;
-};
 
-function SessionCard({ item }: { item: item }) {
-
-
-
+function SessionCard({ item }: { item: ISession }) {
 
   return (
     <div className="session-card relative rounded-xl">
@@ -38,7 +27,7 @@ function SessionCard({ item }: { item: item }) {
           Places restante: {item.placesMax - item.placesReserved}
         </div>
       </div>
-      <button>J'en profite !  </button>
+      <button>J&apos;en profite !  </button>
     </div>
   );
 }

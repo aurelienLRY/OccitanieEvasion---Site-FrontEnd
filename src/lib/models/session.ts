@@ -1,4 +1,5 @@
 import { Schema , model , models } from "mongoose";
+import {ISession } from "@/lib/models/types" ; 
 
 const sessionSchema = new Schema({
   status: { type: String, required: true },
@@ -12,6 +13,6 @@ const sessionSchema = new Schema({
 
 });
 
-const session = models.session || model('session', sessionSchema);
+const session = models.session || model<ISession>('session', sessionSchema);
 
 export default session;

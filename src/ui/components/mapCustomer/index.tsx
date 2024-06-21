@@ -7,20 +7,9 @@ import { Icon } from "leaflet";
 import "./mapCustomer.scss";
 import Image from "next/image";
 
-type spot = {
-  _id: string;
-  name: string;
-  description: string;
-  gpsCoordinates: string;
-  practicedActivities: Array<{ activityName: string; activityId: string }>;
-  half_day: boolean;
-  full_day: boolean;
-  max_OfPeople: number;
-  min_OfPeople: number;
-  meetingPoint: string;
-  estimatedDuration: string;
-  __v: number;
-};
+import { ISpots , ISpot } from "@/lib/models/types";
+
+
 
 const markerEscalade = new Icon({
   iconUrl: "/icon/logo-escalade_markerEscalade.svg",
@@ -33,7 +22,7 @@ function convertGpsCoordinates(gpsCoordinates: string): [number, number] {
   return [parseFloat(gps[0]), parseFloat(gps[1])];
 }
 
-const centerMapContainer = (spots: Array<spot>): [number, number] => {
+const centerMapContainer = (spots: ISpots): [number, number] => {
   if (spots.length === 0) return [0, 0];
 
   const totalCoordinates = spots.reduce(
@@ -52,7 +41,7 @@ const centerMapContainer = (spots: Array<spot>): [number, number] => {
   return [centerLat, centerLng];
 };
 
-export default function MapCustomer({ spots }: { spots: [] }) {
+export default function MapCustomer({ spots }: { spots: ISpots }) {
   const [center, setCenter] = useState<[number, number]>([0, 0]);
   const [isClient, setIsClient] = useState(false);
 
@@ -68,7 +57,7 @@ export default function MapCustomer({ spots }: { spots: [] }) {
   return (
     <MapContainer center={center} zoom={10} className="map-customer">
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      {spots.map((spot) => (
+      {spots.map((spot : ISpot) => (
         <Marker
           key={spot._id}
           position={convertGpsCoordinates(spot.gpsCoordinates)}

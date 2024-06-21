@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from 'next/navigation'
 import "./header.scss";
-const header = () => {
+const Header = () => {
   const pathname = usePathname()
   return (
     <header className="header">
@@ -25,4 +25,4 @@ const header = () => {
   );
 };
 
-export default header;
+export default Header;
