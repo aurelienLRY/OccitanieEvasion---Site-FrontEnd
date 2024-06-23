@@ -2,7 +2,7 @@ import "./svg.scss";
 type Props = {
   className: string;
 };
-export function IconEscalade({ className }) {
+export function IconEscalade({ className }: Props) {
   return (
     <svg
       id="Logo-escalade"

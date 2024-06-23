@@ -3,11 +3,11 @@ import React, { useRef } from 'react'
 type Props = {}
 
 function FormContact({}: Props) {
-    const ref = useRef<HTMLFormElement>(null)
+    const ref = useRef<HTMLFormElement | null>(null) 
 
     const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        const formData = new FormData(ref.current)
+        const formData = new FormData(ref.current!) 
         const data = {
             name: formData.get('name'),
             email: formData.get('email'),
