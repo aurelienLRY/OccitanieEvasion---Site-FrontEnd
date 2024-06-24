@@ -34,10 +34,7 @@ main {
   min-height: 88.5vh;
 
 
-  @include m.breakpoint(tablet) {
-    box-sizing: border-box;
-    padding: 0.5em 0.5em;
-  }
+
 }
 
 h1,

@@ -7,7 +7,7 @@ import { IconEscalade, IconSpeleo } from "@/ui/svg";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <section className="you-welcome ">
         <div className="you-welcome-text">
           <h2 className="title">
@@ -65,7 +65,7 @@ export default function Home() {
         </div>
       </section>
 
-      <ScrollServices backgroundColor="black" />
+       <ScrollServices backgroundColor="black" /> 
 
       <section className="about">
         <div className="content">
@@ -78,14 +78,17 @@ export default function Home() {
             nous veillons à ce que chaque sortie soit un plaisir, tant pour vous
             que pour nous…
           </p>
-          <Link href="/">En savoir plus</Link>
+          <Link href="/apropos" className="btn small">En savoir plus</Link>
         </div>
       </section>
+
+
       <section>
         <h2 className="title">Les lieux de pratiques</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, rem obcaecati cumque ipsum inventore iure perferendis? Eveniet, consectetur expedita fugit repellat ullam voluptatum sit natus deserunt obcaecati fuga minima sequi.</p>
       </section>
 
-      <section className="carrousel"></section>
-    </main>
+      
+    </>
   );
 }

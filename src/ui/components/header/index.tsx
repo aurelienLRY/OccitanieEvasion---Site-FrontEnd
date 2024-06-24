@@ -10,8 +10,7 @@ const Header = () => {
   return (
     <header className="header">
       <nav className=" block start">
-
-      <div id="nav_trigger">
+        <div id="nav_trigger">
           <button
             aria-label="Main Menu"
             onClick={() => setOpened(!opened)}
@@ -32,33 +31,37 @@ const Header = () => {
         </div>
 
         <div className={opened ? "opened nav_links" : "nav_links"}>
-
-          <Link className={`link ${pathname === "/" ? "active" : ""}`} href="/">
+          <Link
+            className={`link ${pathname === "/" ? "active" : ""}`}
+            href="/"
+            onClick={() => setOpened(false)}
+          >
             Accueil
           </Link>
           <Link
             className={`link ${pathname === "/activites" ? "active" : ""}`}
             href="/activites"
+            onClick={() => setOpened(false)}
           >
             Activités
           </Link>
-          <Link href="/lieux">Lieux</Link>
+          <Link href="/lieux" onClick={() => setOpened(false)}>
+            Lieux
+          </Link>
           <Link
             className={`link ${pathname === "/contact" ? "active" : ""}`}
             href="/contact"
+            onClick={() => setOpened(false)}
           >
             Contact
-          </Link>  
-          </div>
+          </Link>
+        </div>
       </nav>
 
-      
-      <Link href="/" className="header-logo block center">
+      <Link href="/" className="header-logo block center" onClick={() => setOpened(false)}>
         <Image src="/next.svg" alt="logo" width={100} height={100} />
         <h1>Occitanie Evasion</h1>
       </Link>
-    
-
 
       <div className="block end">
         <button className="btn-secondary small "> Reserver </button>
@@ -68,5 +71,3 @@ const Header = () => {
 };
 
 export default Header;
-
-

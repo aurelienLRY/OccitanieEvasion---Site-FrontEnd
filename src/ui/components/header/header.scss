@@ -1,6 +1,7 @@
 @use "../../styles/abstracts/variables" as v;
 @use "../../styles/abstracts/mixins" as m;
 .header {
+  z-index: 950;
   position: relative;
   box-sizing: border-box;
   width: 100%;
@@ -9,13 +10,19 @@
   padding: 0.5em 1em;
   background-color: v.$primary-color;
 
-  @include m.breakpoint(desktop) {
-    justify-content: center;
+  .nav{
+
+    @include m.breakpoint(desktop) {
+     width: 0px;
+    }
   }
+
 
   .block {
     display: flex;
     flex: 1;
+
+  
 
     &.center {
       justify-content: center;
@@ -79,7 +86,7 @@
       position: fixed;
       right: 0em;
       top: 0em;
-      transform: translateX(300px);
+      transform: translateX(350px);
 
       display: flex;
       flex-direction: column;
@@ -108,8 +115,8 @@
   @include m.breakpoint(desktop) {
     z-index: 910;
     position: fixed;
-    bottom: 2em;
-    right:2em;
+    bottom: 15px;
+    right:15px;
     background-color: v.$primary-color;
     border: none;
     border-radius: 2em;
@@ -118,43 +125,48 @@
     padding: 0;
     width: 3em;
     height: 3em;
+    transition: all 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  &.opened{
+        border: solid 3px white;
   }
 }
 
 .line {
   fill: none;
-  stroke: v.$text-color;
-  stroke-width: 6;
+  stroke: white;
+  stroke-width: 3;
   transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
     stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .line1 {
   stroke-dasharray: 60 207;
-  stroke-width: 6;
+  stroke-width: 3;
 }
 .line2 {
   stroke-dasharray: 60 60;
-  stroke-width: 6;
+  stroke-width: 3;
 }
 .line3 {
   stroke-dasharray: 60 207;
-  stroke-width: 6;
+  stroke-width: 3;
 }
 .opened .line1 {
   stroke-dasharray: 90 207;
   stroke-dashoffset: -134;
-  stroke-width: 6;
+  stroke-width: 3;
 }
 .opened .line2 {
   stroke-dasharray: 1 60;
   stroke-dashoffset: -30;
-  stroke-width: 6;
+  stroke-width: 3;
 }
 .opened .line3 {
   stroke-dasharray: 90 207;
   stroke-dashoffset: -134;
-  stroke-width: 6;
+  stroke-width: 3;
 }
 
 @keyframes test {
