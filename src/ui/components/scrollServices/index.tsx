@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect, use } from "react";
+import React, { useRef, useEffect} from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
@@ -53,6 +53,7 @@ function ScrollServices({backgroundColor} : props) {
               height={2969}
               style={{
                 objectFit: "cover",
+                objectPosition: "70% 0%",
                 width: "100%",
                 height: "100%",
                 position: "relative",
@@ -81,6 +82,7 @@ function ScrollServices({backgroundColor} : props) {
               height={4000}
               style={{
                 objectFit: "cover",
+                objectPosition: "40% 0%",
                 width: "100%",
                 height: "100%",
                 position: "relative",
@@ -109,6 +111,7 @@ function ScrollServices({backgroundColor} : props) {
               height={5504}
               style={{
                 objectFit: "cover",
+                objectPosition: "25% 0%",
                 width: "100%",
                 height: "100%",
                 position: "relative",

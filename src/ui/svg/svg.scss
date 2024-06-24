@@ -2,9 +2,11 @@
 
 svg.icon {
   aspect-ratio: 1 / 1;
-  width: 250px ;
-  height: 250px ;
+  width: 250px;
+  height: 250px;
   $color: v.$primary-color;
+  font-family: Heaters, Heaters;
+  font-size: 24px;
 
   .cls-1,
   .cls-2,
@@ -35,11 +37,6 @@ svg.icon {
     fill: lighten($color, 60%);
   }
 
-  .cls-9 {
-    font-family: Heaters, Heaters;
-    font-size: 24px;
-  }
-
   .cls-4 {
     fill: none;
   }
@@ -59,79 +56,109 @@ svg.icon {
   .cls-8 {
     fill: lighten($color, 32%);
   }
+}
 
-  &.hover:hover {
-    $color: v.$secondary-color;
+svg.markerEscalade {
+  .cls-1,
+  .cls-2,
+  .cls-3,
+  .cls-4,
+  .cls-5,
+  .cls-6,
+  .cls-7,
+  .cls-8 {
+    stroke-width: 0px;
+  }
 
-    .cls-1,
-    .cls-9 {
-      fill: $color;
-    }
+  .cls-1,
+  .cls-9 {
+    fill: #000;
+  }
+
+  .cls-2 {
+    fill: #f2f2f2;
+  }
+
+  .cls-10 {
+    opacity: 0.9;
+  }
+
+  .cls-3 {
+    fill: silver;
+  }
+
+  .cls-4 {
+    fill: none;
+  }
+
+  .cls-5 {
+    fill: #a8a8a8;
+  }
+
+  .cls-9 {
+    font-family: Heaters, Heaters;
+    font-size: 27.65px;
+  }
+
+  .cls-6 {
+    fill: #797979;
+  }
+
+  .cls-7 {
+    fill: #d8d8d8;
+  }
+
+  .cls-8 {
+    fill: #929292;
   }
 }
 
+svg.iconSpeleo {
+  .cls-5 {
+    fill: url(#Dégradé_sans_nom_11);
+  }
 
-svg.markerEscalade{
-
-      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8 {
-        stroke-width: 0px;
-      }
-
-      .cls-1, .cls-9 {
-        fill: #000;
-      }
-
-      .cls-2 {
-        fill: #f2f2f2;
-      }
-
-      .cls-10 {
-        opacity: .9;
-      }
-
-      .cls-3 {
-        fill: silver;
-      }
-
-      .cls-4 {
-        fill: none;
-      }
-
-      .cls-5 {
-        fill: #a8a8a8;
-      }
-
-      .cls-9 {
-        font-family: Heaters, Heaters;
-        font-size: 27.65px;
-      }
-
-      .cls-6 {
-        fill: #797979;
-      }
-
-      .cls-7 {
-        fill: #d8d8d8;
-      }
-
-      .cls-8 {
-        fill: #929292;
-      }
-
+  .cls-10 {
+    fill: #fff;
+    font-family: Heaters, Heaters;
+    font-size: 23.41px;
+  }
 }
 
+svg.icon:hover g#contour,
+svg.icon:hover g#Contour {
+  $color: v.$secondary-color;
 
-svg.iconSpeleo{
-  
-        .cls-5 {
-          fill: url(#Dégradé_sans_nom_11);
-        }
-  
-        .cls-10 {
-          fill: #fff;
-          font-family: Heaters, Heaters;
-          font-size: 23.41px;
-        }
-  
+  .cls-1,
+  .cls-9 {
+    fill: $color;
+  }
 
+  .cls-2 {
+    fill: lighten($color, 75%);
+  }
+
+  .cls-10 {
+    opacity: 0.9;
+  }
+
+  .cls-3 {
+    fill: lighten($color, 60%);
+  }
+
+  .cls-5 {
+    fill: lighten($color, 40%);
+  }
+
+  .cls-6 {
+    fill: lighten($color, 18%);
+  }
+
+  .cls-7 {
+    fill: lighten($color, 50%);
+  }
+
+  .cls-8 {
+    fill: lighten($color, 32%);
+  }
 }

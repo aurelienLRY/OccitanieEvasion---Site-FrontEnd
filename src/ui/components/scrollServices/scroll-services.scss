@@ -1,4 +1,7 @@
 @use "../../styles/abstracts/variables" as v;
+@use "../../styles/abstracts/mixins" as m;
+
+
 .scroll-section-outer {
   overflow: hidden;
 }
@@ -32,16 +35,31 @@
     flex-direction: column;
     gap: 0.5em;
 
+    @include m.breakpoint(tablet) {
+      width: 80%;
+      bottom: 10%;
+      left: 10%;
+    }
+
     //background-color: rgba(206, 206, 206, 0.292);
     &-title {
       font-size: 7em;
       color: white;
       font-weight: bold;
+    
+      @include m.breakpoint(tablet) {
+        font-size: 3em
+      }
+    
     }
 
     &-text {
       font-size: 2em;
       color: whitesmoke;
+
+      @include m.breakpoint(tablet) {
+        font-size: 1.5em
+      }
     }
 
     &-link {
