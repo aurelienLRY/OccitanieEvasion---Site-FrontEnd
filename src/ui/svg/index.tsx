@@ -1144,9 +1144,9 @@ export function IconSpeleo({ className }: { className: string }) {
           y2="58.43"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stop-color="#fff" />
-          <stop offset="0" stop-color="#1d1d1b" stop-opacity=".5" />
-          <stop offset="1" stop-color="#f4f4f4" stop-opacity="0" />
+          <stop offset="0" stopColor="#fff" />
+          <stop offset="0" stopColor="#1d1d1b" stopOpacity="0.5" />
+          <stop offset="1" stopColor="#f4f4f4" stopOpacity="0" />
         </linearGradient>
       </defs>
       <g id="Dessin">

@@ -61,7 +61,7 @@ function ScrollServices({backgroundColor} : props) {
             <div className="content">
               <h3 className="content-title">Escalade</h3>
               <p className="content-text">
-              Initiez-vous à la grimpe en famille ou entre amis. Profitez de parois de renommée mondiale, dans un cadre nature préservé.
+              Grimpez et prenez de la hauteur sur les magnifiques falaises de la région.
               </p>
               <div className="content-link">
                 <Link href="/" className="btn-outline-white">
@@ -89,15 +89,13 @@ function ScrollServices({backgroundColor} : props) {
             <div className="content">
               <h3 className="content-title">Spéléologie</h3>
               <p className="content-text">
-                Découvrez un univers inconnu dans les cavités des Grands
-                Causses. Des sorties accessibles pour se familiariser avec le
-                monde sous-terrain.
+              Explorez les merveilles cachées du monde souterrain au coeur des nombreuses grottes du secteur.
               </p>
               <div className="content-link">
                 <Link href="/" className="btn-outline-white">
                   Réserver
                 </Link>
-                <Link href="/" className="btn-outline-white secondary">
+                <Link href="activites/speleo" className="btn-outline-white secondary">
                   En savoir plus
                 </Link>
               </div>
@@ -117,16 +115,15 @@ function ScrollServices({backgroundColor} : props) {
               }}
             />
             <div className="content">
-              <h3 className="content-title">Randonnée Aquatique</h3>
+              <h3 className="content-title">Canyoning </h3>
               <p className="content-text">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic,
-                delectus dignissimos.
+              Sautez, glissez sur les toboggans naturels et nagez dans les eaux fraîches des gorges sauvages pour une aventure aquatique rafraîchissante et riche en sensations.
               </p>
               <div className="content-link">
                 <Link href="/" className="btn-outline-white ">
                   Réserver
                 </Link>
-                <Link href="/" className="btn-outline-white secondary">
+                <Link href="/activites/canyoning" className="btn-outline-white secondary">
                   En savoir plus
                 </Link>
               </div>

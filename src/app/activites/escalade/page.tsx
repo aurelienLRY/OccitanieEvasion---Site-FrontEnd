@@ -80,14 +80,14 @@ async function EscaladeActivity() {
             <TachClipPath className="clip-path">
               <h2>Profitez de date déjà programmé </h2>
               <div className="activity-booking_card">
-                {sessions ? (
+                {/* {sessions ? (
                   <CarouselSession sessions={sessions} />
                 ) : (
                   <>
                     <p> Aucune session n&apos;est programmée pour le moment </p>
                     <p> Réservez en une! </p>
                   </>
-                )}
+                )} */}
               </div>
             </TachClipPath>
           </article>

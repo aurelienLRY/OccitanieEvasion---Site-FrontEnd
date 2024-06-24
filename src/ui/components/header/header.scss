@@ -1,11 +1,32 @@
 @use "../../styles/abstracts/variables" as v;
+@use "../../styles/abstracts/mixins" as m;
 .header {
+  position: relative;
   box-sizing: border-box;
   width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 0.5em 1em;
   background-color: v.$primary-color;
+
+  @include m.breakpoint(desktop) {
+    justify-content: center;
+  }
+
+  .block {
+    display: flex;
+    flex: 1;
+
+    &.center {
+      justify-content: center;
+    }
+    &.end {
+      justify-content: flex-end;
+    }
+    &.start {
+      justify-content: flex-start;
+    }
+  }
 
   &-logo {
     display: flex;
@@ -14,46 +35,134 @@
     gap: 0.5em;
     text-decoration: none;
     h1 {
+      font-size: 1.2em;
       color: white;
     }
   }
 
-  nav {
+  .nav_links {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 4em;
-    .nav-link {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1.2em;
-      a {
-        text-decoration: none;
-        color: white;
-        font-size: large;
-        transition: all 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        &.active {
-          font-weight: bold;
-  
-          &::after {
-            transform: scaleX(1);
-          }
-        }
-        &:hover::after {
-          transform: scaleX(1);
-        }
+    gap: 1.2em;
+    a {
+      text-decoration: none;
+      color: white;
+      font-size: large;
+      transition: all 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      &.active {
+        font-weight: bold;
 
         &::after {
-          content: " ";
-          display: block;
-          width: 100%;
-          border-bottom: 2px solid white;
-          margin-top: 0.4em;
-          transform: scaleX(0);
-          transform-origin: (0% 50%);
-          transition: all 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          transform: scaleX(1);
         }
       }
+      &:hover::after {
+        transform: scaleX(1);
+      }
+
+      &::after {
+        content: " ";
+        display: block;
+        width: 100%;
+        border-bottom: 2px solid white;
+        margin-top: 0.4em;
+        transform: scaleX(0);
+        transform-origin: (0% 50%);
+        transition: all 250ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
     }
+
+    @include m.breakpoint(desktop) {
+      //comportement
+      z-index: 900;
+      position: fixed;
+      right: 0em;
+      top: 0em;
+      transform: translateX(300px);
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+
+      //style
+      background-color: v.$primary-color;
+      padding: 1em;
+      border-radius: 1em 0em 0em 1em;
+      height: 100vh;
+      min-width: 200px;
+
+      &.opened {
+        transform: translateX(0px);
+      }
+      transition: transform 350ms;
+    }
+  }
+}
+
+//btn trigger
+#nav_trigger button {
+  display: none;
+
+  @include m.breakpoint(desktop) {
+    z-index: 910;
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    background-color: v.$primary-color;
+    border: none;
+    border-radius: 2em;
+    cursor: pointer;
+    display: flex;
+    padding: 0;
+    width: 3.5em;
+    height: 3.5em;
+  }
+}
+
+.line {
+  fill: none;
+  stroke: white;
+  stroke-width: 6;
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line1 {
+  stroke-dasharray: 60 207;
+  stroke-width: 6;
+}
+.line2 {
+  stroke-dasharray: 60 60;
+  stroke-width: 6;
+}
+.line3 {
+  stroke-dasharray: 60 207;
+  stroke-width: 6;
+}
+.opened .line1 {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+  stroke-width: 6;
+}
+.opened .line2 {
+  stroke-dasharray: 1 60;
+  stroke-dashoffset: -30;
+  stroke-width: 6;
+}
+.opened .line3 {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+  stroke-width: 6;
+}
+
+@keyframes test {
+  from {
+    transform: translateX(800px);
+  }
+  to {
+    transform: translateX(0px);
   }
 }

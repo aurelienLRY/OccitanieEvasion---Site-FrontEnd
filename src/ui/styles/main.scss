@@ -5,6 +5,10 @@
 @use "base/typography";
 @use "component";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html {
   font-family: v.$fontFamily;
   font-size: v.$fontSize;
@@ -45,7 +49,6 @@ h6 {
   font-family: v.$titleFontFamily;
   color: v.$primary-color;
   font-weight: 300;
-  font-size: v.$fontSize * 1.5;
 }
 
 h1 {
@@ -55,7 +58,7 @@ h1 {
 
 h2{
   font-weight: 600;
-  font-size: v.$fontSize * 2.0;
+  font-size: v.$fontSize * 2.5;
 }
 
 h3{
