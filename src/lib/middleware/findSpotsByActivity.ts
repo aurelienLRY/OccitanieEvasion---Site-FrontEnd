@@ -1,19 +1,42 @@
+// @/lib/middleware/findSpotsByActivity.ts
 "use server";
 
-import Activity from "@/lib/models/activity";
-import spots from "@/lib/models/spots";
+/* Models */
+import Activity from "@/lib/dataBase/models/activity";
+import Spot from "@/lib/dataBase/models/spots";
+/* TypeScript types */
+import { IActivity, ISpots } from "@/lib/dataBase/models/types";
 
-import { IActivity, IActivities, ISpot, ISpots } from "@/lib/models/types";
+/**
+ * Finds spots by activity.
+ * @param {string} activity - The activity to search for. (e.g. "escalade")
+ * @returns {Promise<ISpots[] | null>} - The spots found for the given activity, or null if the activity is not found.
+ */
+export default async function findSpotsByActivity(activity: string): Promise<ISpots | null> {
+  try {
+    const foundActivity: IActivity | null = await Activity.findOne({ name: activity });
+    if (!foundActivity) {
+      console.error(`Activity ${activity} not found`);
+      return null;
+    }
+    const result: ISpots = JSON.parse(JSON.stringify( await Spot.find({
+      practicedActivities: {
+        $elemMatch: {
+          activityId: foundActivity._id.toString()
+        }
+      }
+    })));
+    if (!result) {
+      console.error(`No spots found for activity ${activity}`);
+      return null;
+    }
 
-export default async function findSpotsByActivity(activity: string) {
-  const activities: IActivities = await Activity.find().lean();
-  const thisActivity: IActivity | undefined = activities.find(
-    (act: { name: string }) => act.name === activity
-  );
-  if (!thisActivity) {
+    console.log(`Spots found for activity ${activity}: ${result}`);
+
+
+    return JSON.parse(JSON.stringify(result)) as ISpots;
+  } catch (error: unknown) {
+    console.error(`Error finding spots by activity: ${(error as Error).message}`);
     return null;
   }
-
-  const spot: ISpots = await spots.find({ activity: thisActivity._id });
-  return spot;
 }

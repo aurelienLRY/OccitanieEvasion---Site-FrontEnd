@@ -1,5 +1,13 @@
+// @/lib/models/spots
+"use server";
+/* Models */
 import { Schema, model, models } from "mongoose";
+/* TypesScript types*/
+import { ISpot } from "@/lib/dataBase/models/types";
 
+/*
+ * Spot Schema
+ */
 const spotSchema = new Schema({
   name: {
     type: String,
@@ -54,5 +62,5 @@ const spotSchema = new Schema({
     required: false
   },
 });
-const spots = models.spots || model("spots", spotSchema);
+const spots = models.spots || model<ISpot>("spots", spotSchema);
 export default spots;

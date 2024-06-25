@@ -111,7 +111,7 @@ function ScrollServices({backgroundColor} : props) {
               height={5504}
               style={{
                 objectFit: "cover",
-                objectPosition: "25% 0%",
+                objectPosition: "20% 0%",
                 width: "100%",
                 height: "100%",
                 position: "relative",

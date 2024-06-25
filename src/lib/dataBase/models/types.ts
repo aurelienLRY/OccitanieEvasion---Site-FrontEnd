@@ -1,4 +1,10 @@
 /*
+* @/lib/models/types
+* @aurelienLRY
+* This file contains the typescript types for the models
+*/
+
+/*
 * Interface for the activity model
 */
 export interface IActivity {
@@ -14,7 +20,7 @@ export interface IActivity {
     min_OfPeople: number;
 }
 
-export type IActivities = IActivity[];
+export type IActivities = Array<IActivity>;
 
 /*
 * Interface for the spot model
@@ -34,7 +40,7 @@ export interface ISpot {
     estimatedDuration: string;
 }
 
-export type ISpots = ISpot[];
+export type ISpots = Array<ISpot>;
 
 /*
 * Interface for the session model
@@ -51,4 +57,4 @@ export interface ISession {
     placesReserved: number;
 }
 
-export type ISessions = ISession[];
+export type ISessions = Array<ISession>;

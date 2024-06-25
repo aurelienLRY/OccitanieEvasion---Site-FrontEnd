@@ -1,5 +1,13 @@
+// @/lib/models/activity.ts
+'use server'
+/* Models */
 import { Schema , model , models } from "mongoose";
+/* TypesScript types*/
+import { IActivity } from "@/lib/dataBase/models/types" ;
 
+/*
+ * Activity Schema
+ */
 const activitySchema = new Schema({
   name: {
     type: String,
@@ -41,6 +49,6 @@ const activitySchema = new Schema({
   },
 });
 
-const activity = models.activity || model("activity", activitySchema);
+const Activity = models.activity || model<IActivity>("activity", activitySchema);
 
-export default activity;
+export default Activity;

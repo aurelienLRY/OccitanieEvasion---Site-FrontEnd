@@ -1,16 +1,13 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 import SessionCard from "@/ui/components/SessionCard";
-
-import { ISessions } from "@/lib/models/types"; 
-
-/*styles*/
+import { ISessions } from "@/lib/dataBase/models/types";
+import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 import "./carouselSessionCard.scss";
 
-
-const CarouselSession = ({ sessions } : {sessions : ISessions}) => {
+const CarouselSession = ({ sessions }: { sessions: ISessions }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   const nextIndex = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 2) % sessions.length);
@@ -22,42 +19,58 @@ const CarouselSession = ({ sessions } : {sessions : ISessions}) => {
     );
   }, [sessions.length]);
 
-  const resetInterval = useCallback(() => {
-    if (intervalId) clearInterval(intervalId);
-    const newIntervalId = setInterval(nextIndex, 5000);
-    setIntervalId(newIntervalId);
-  }, [intervalId, nextIndex]);
-
   useEffect(() => {
-    resetInterval();
-    return () => {
-      if (intervalId) clearInterval(intervalId);
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resetInterval]);
+    if (isHovered) return;
 
-  useEffect(() => {
-    resetInterval();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentIndex]);
+    const intervalId = setInterval(nextIndex, 5000);
+
+    return () => clearInterval(intervalId);
+  }, [nextIndex, isHovered]);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  const renderDots = () => {
+    const dotCount = Math.ceil(sessions.length / 2);
+    return (
+      <div className="carousel-dots">
+        {Array.from({ length: dotCount }).map((_, index) => (
+          <span
+            key={index}
+            className={`dot ${index === Math.floor(currentIndex / 2) ? "active" : ""}`}
+          ></span>
+        ))}
+      </div>
+    );
+  };
 
   return (
-    <div className="carousel-sessionCard">
+    <div
+      className="carousel-sessionCard"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <button onClick={prevIndex} className="btnPrev">
-        Previous
+        <BsArrowLeftCircleFill className="svg" />
       </button>
       <div className="activity-session_card">
-        {sessions 
+        {sessions
           .slice(currentIndex, currentIndex + 2)
-          .map((session, index) => (
-            <SessionCard item={session} key={`sessionCard-${index}`} />
+          .map((session) => (
+            <SessionCard item={session} key={`sessionCard-${session._id}`} />
           ))}
       </div>
       <button onClick={nextIndex} className="btnNext">
-        Next
+        <BsArrowRightCircleFill className="svg" />
       </button>
+      {renderDots()}
     </div>
   );
-}
+};
 
 export default CarouselSession;

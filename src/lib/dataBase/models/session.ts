@@ -1,6 +1,13 @@
+// @/lib/models/session.ts
+'use server'
+/* Models */
 import { Schema , model , models } from "mongoose";
-import {ISession } from "@/lib/models/types" ; 
+/* TypesScript types*/
+import {ISession } from "@/lib/dataBase/models/types" ; 
 
+/*
+  * Session Schema
+  */
 const sessionSchema = new Schema({
   status: { type: String, required: true },
   date: { type: Date, required: true },

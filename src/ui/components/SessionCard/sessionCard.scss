@@ -1,27 +1,51 @@
 @use "../../../ui/styles/abstracts/variables" as v;
 @use "../../../ui/styles/abstracts/mixins" as m;
-.session-card{ 
-    box-sizing: border-box;
-    width: 350px;
-    //max-width: 950px;
-    padding: 0.5em;
-   
-   // background-color:v.$secondary-color-900;
-   
-    border-radius: 0.8rem;
 
+.session-card {
+  /* style*/
+  background-color: white;
+  border-radius: 0.8rem;
+  padding: 1em;
+  @include m.shadow();
+  
+  
+  /* comportement */
+  overflow: hidden;
+  max-height: 150px;
+  width: 370px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+
+  &_body{
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+  }
+ &_logo{
+    width: 70px !important;
+    height: auto !important;
+ }
+ 
+ .body_content{
+    font-size: medium;
+
+    .places{
+        font-size: small;   
+    }
+ }
+
+ &_footer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     gap: 0.5em;
 
-    @include m.shadow();
-}
-
-svg.session-card_svg{
-    width: 50px !important;
-    height: 50px !important;
-   // fill: v.$primary-color;
-   // background-color: v.$background-light;
-    border-radius: 50%;
- 
+    font-size: small;
+ }
 }

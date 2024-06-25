@@ -1,47 +1,53 @@
-'use client'; 
-import React from "react";
+"use client";
+import React , { useState, useEffect, use} from "react";
 import Image from "next/image";
-import { ISessions , ISession} from "@/lib/models/types";
+import { ISessions, ISession } from "@/lib/dataBase/models/types";
 
 /*services*/
-import { dateToFr, formatHours } from "@/lib/data/services/date";
+import { dateToFr, formatHours } from "@/lib/services/date";
 import "./sessionCard.scss";
 
 /*svg*/
-import { IconEscalade,  IconSpeleo } from "@/ui/svg";
+import { IconEscalade, IconSpeleo } from "@/ui/svg";
 
 
 function SessionCard({ item }: { item: ISession }) {
+  const [x , setX] = useState<ISession>(item)
+
+  useEffect(() => {
+    setX(item)
+  }, [])
 
   return (
-    <div className="session-card relative rounded-xl">
-      <div className="logo">
+    <div className="session-card relative ">
+      <div className="session-card_body ">
         {displayIconByActivity(item.activity)}
-      </div>
-      <div className="session-card_content">
-        <div className="session-card_content_date">
-          le {dateToFr(item.date)} {formatHours(item)}
+        <div className="body_content">
+          <div className="date">
+            le {dateToFr(x.date)} {formatHours(x)}
+          </div>
+          <div className="spot">à {x.spot}</div>
+          <div className="places">
+            Places restante: {x.placesMax - x.placesReserved}
+          </div>
         </div>
-        <div className="session-card_content_spot">{item.spot}</div>
-        <div className="session-card_content_places">
-          Places restante: {item.placesMax - item.placesReserved}
-        </div>
       </div>
-      <button>J&apos;en profite !  </button>
+      <div className="session-card_footer">
+      <button className="btn small">J&apos;en profite</button>
+      </div>
     </div>
   );
 }
 
 export default SessionCard;
 
-
 function displayIconByActivity(activity: string) {
   switch (activity) {
     case "escalade":
-      return <IconEscalade className={'session-card_svg'} />;
-      break; 
+      return <IconEscalade className={"session-card_logo"} />;
+      break;
     case "spéléologie":
-      return <IconSpeleo className={'session-card_svg'}/>;
+      return <IconSpeleo className={"session-card_logo"} />;
       break;
     default:
       return <p>Activité non reconnue</p>;
