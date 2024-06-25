@@ -31,8 +31,6 @@ export default async function findSpotsByActivity(activity: string): Promise<ISp
       return null;
     }
 
-    console.log(`Spots found for activity ${activity}: ${result}`);
-
 
     return JSON.parse(JSON.stringify(result)) as ISpots;
   } catch (error: unknown) {
