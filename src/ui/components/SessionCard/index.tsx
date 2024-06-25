@@ -21,7 +21,7 @@ function SessionCard({ item }: { item: ISession }) {
   return (
     <div className="session-card relative ">
       <div className="session-card_body ">
-        {displayIconByActivity(item.activity)}
+        {displayIconByActivity(x.activity)}
         <div className="body_content">
           <div className="date">
             le {dateToFr(x.date)} {formatHours(x)}

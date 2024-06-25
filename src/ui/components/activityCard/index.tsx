@@ -29,7 +29,7 @@ function ActivityCard({
           width={width}
           height={height}
           //layout="responsive"
-          objectFit="cover"
+          //objectFit="cover"
           className="activity-card_image"
         />
         <div className="activity-card_text">
