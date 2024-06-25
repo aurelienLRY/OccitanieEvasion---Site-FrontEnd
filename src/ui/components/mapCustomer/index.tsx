@@ -1,6 +1,7 @@
 // /src/ui/components/mapCustomer/index.tsx
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -9,13 +10,15 @@ import "./mapCustomer.scss";
 
 import { ISpots, ISpot } from "@/lib/dataBase/models/types";
 
-export default function MapCustomer({ spots }: { spots: ISpots | null }) {
-  
+function MapCustomer({ spots }: { spots: ISpots | null }) {
   const [center, setCenter] = useState<[number, number]>([0, 0]);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true);
+    if (typeof window !== "undefined") {
+      setIsClient(true);
+    }
+
     if (spots !== null) {
       setCenter(centerMapContainer(spots));
     }
@@ -75,3 +78,6 @@ const centerMapContainer = (spots: ISpots): [number, number] => {
 
   return [centerLat, centerLng];
 };
+
+// Exportez le composant en utilisant `dynamic` pour désactiver le rendu côté serveur
+export default dynamic(() => Promise.resolve(MapCustomer), { ssr: false });
