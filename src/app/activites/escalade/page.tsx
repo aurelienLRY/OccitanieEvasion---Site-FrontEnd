@@ -1,4 +1,6 @@
 "use server";
+/*librairie */
+import dynamic from "next/dynamic";
 
 /* Modules MongoDB  */
 import { connectDB, disconnectDB } from "@/lib/dataBase/connectMongo";
@@ -8,7 +10,7 @@ import findSpotsByActivity from "@/lib/middleware/findSpotsByActivity";
 
 /* Components */
 import SgvEscalade from "@/ui/components/svgEscaladeGrandVoie";
-import MapCustomer from "@/ui/components/mapCustomer";
+//import MapCustomer from "@/ui/components/mapCustomer";
 import FormulasCard from "@/ui/components/fomulasCard";
 import ActivityCard from "@/ui/components/activityCard";
 import SkewedWrapper from "@/ui/components/skewedWrapper";
@@ -44,14 +46,18 @@ const itemsFormulas = [
   },
 ];
 
-const itemsParallaxBanner = 
-  {
-    urlBack: "/img/pexels-pixabay-461593.jpg",
-    urlFront: "/img/pexels-pixabay-461593 front.png",
-    alt: "personne qui pratique l'escalade",
-    title: "Escalade",
-    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi veritatis quod molestias assumenda.",
-  };
+const itemsParallaxBanner = {
+  urlBack: "/img/pexels-pixabay-461593.jpg",
+  urlFront: "/img/pexels-pixabay-461593 front.png",
+  alt: "personne qui pratique l'escalade",
+  title: "Escalade",
+  description:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi veritatis quod molestias assumenda.",
+};
+
+const MapCustomer = dynamic(() => import("@/ui/components/mapCustomer"), {
+  ssr: false,
+});
 
 const fetchData = async () => {
   try {
@@ -67,16 +73,13 @@ const fetchData = async () => {
   }
 };
 
-
-
 async function EscaladeActivity() {
   const { sessions, filteredSpots } = await fetchData();
   return (
     <main className="escalade-activity">
-      <SkewedWrapper direction="left" bottom={true} top={false} >
+      <SkewedWrapper direction="left" bottom={true} top={false}>
         <ParallaxBanner item={itemsParallaxBanner} />
       </SkewedWrapper>
-
 
       <section className="introduction-activity">
         <ActivityCard
@@ -102,38 +105,47 @@ async function EscaladeActivity() {
         </ActivityCard>
       </section>
 
+      <SkewedWrapper
+        direction="right"
+        top={true}
+        bottomReverse={true}
+        skewedColor={"#f78f4c"}
+      >
+        <section className="activity-formulas relative">
+          <SgvEscalade className="svg-background" />
+          <article>
+            <h2 className="activity-formulas_title">Nos formules</h2>
+            <div className="formulas-card">
+              {itemsFormulas.map((item, index) => (
+                <FormulasCard item={item} key={`formulasCard-${index}`} />
+              ))}
+            </div>
+          </article>
+
+          <aside className="booking">
+            <h2>Profitez d&apos;une Session déjà programmée</h2>
+            <div className="booking_carrousel">
+              {sessions ? (
+                <CarouselSession sessions={sessions} />
+              ) : (
+                <>
+                  <p> Aucune session n&apos;est programmée pour le moment </p>
+                  <p> Réservez-en une! </p>
+                </>
+              )}
+            </div>
+          </aside>
+        </section>
+      </SkewedWrapper>
+
       
-      <section className="activity-formulas relative">
-      <SkewedWrapper direction="right" bottom={true} top={true}  skewedColor={'--secondary-color'}>
-        <SgvEscalade className="svg-background" />
-        <article>
-          <h2 className="activity-formulas_title">Nos formules</h2>
-          <div className="formulas-card">
-            {itemsFormulas.map((item, index) => (
-              <FormulasCard item={item} key={`formulasCard-${index}`} />
-            ))}
-          </div>
-        </article>
+      <section className="activity-tof"><h2>ldejk</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quia aperiam earum quisquam deserunt cumque consectetur rem cum nobis, quidem adipisci suscipit necessitatibus sapiente, inventore molestiae hic! Numquam, pariatur officiis?</p></section>
 
-        <aside className="booking">
-          <h2>Profitez d&apos;une Session déjà programmée</h2>
-          <div className="booking_carrousel">
-            {sessions ? (
-              <CarouselSession sessions={sessions} />
-            ) : (
-              <>
-                <p> Aucune session n&apos;est programmée pour le moment </p>
-                <p> Réservez-en une! </p>
-              </>
-            )}
-          </div>
-        </aside>      
-        </SkewedWrapper>
-      </section>
 
-      <section className="activity-tof"></section>
-      <section className="map-activity">
-        <div className="map-activity_content">
+      <SkewedWrapper direction="left" topReverse={true} bottom={true}>
+        <section className="map-activity">
+          <div className="map-activity_content">
           <h2>Map</h2>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
@@ -146,6 +158,7 @@ async function EscaladeActivity() {
           <MapCustomer spots={filteredSpots} />
         </div>
       </section>
+      </SkewedWrapper>
     </main>
   );
 }

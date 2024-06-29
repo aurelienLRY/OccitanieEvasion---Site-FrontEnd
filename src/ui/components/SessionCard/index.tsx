@@ -16,7 +16,7 @@ function SessionCard({ item }: { item: ISession }) {
 
   useEffect(() => {
     setX(item)
-  }, [])
+  }, [item])
 
   return (
     <div className="session-card relative ">

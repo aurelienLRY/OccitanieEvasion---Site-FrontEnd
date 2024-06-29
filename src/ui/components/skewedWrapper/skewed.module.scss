@@ -4,7 +4,10 @@
 .skewed {
   position: relative;
   width: 100%;
-  background-color: var(--background-color, white); // Utilisation de la variable CSS
+  background-color: var(
+    --background-color,
+    white
+  ); // Utilisation de la variable CSS
 
   .skewed-content {
     transform: skewY(0deg);
@@ -12,127 +15,142 @@
 
   &::before,
   &::after {
-    background: var(--skewed-color, white); // Utilisation de la variable CSS pour les éléments skewed
+    background: var(
+      --skewed-color,
+      white
+    ); // Utilisation de la variable CSS pour les éléments skewed
   }
 
   &.bottom {
-    &::before {
-      content: "";
-      position: absolute;
-      bottom: -6vw;
-      left: 0;
-      width: 100%;
-      height: 6vw;
-      z-index: 11;
-
-      @include m.breakpoint(md-mobile) {
-        display: none;
-      }
-    }
-
+    margin-bottom: 2vw;
     &::after {
       content: "";
       position: absolute;
-      bottom: -2vw;
+      bottom: -9vw;
       left: 0;
       width: 100%;
-      height: 5vw;
+      height: 15vw;
       background: linear-gradient(
         to top,
-        var(--skewed-color, white) 0%,
-        var(--skewed-color, white) 48%,
-        rgba(255, 255, 255, 0) 100%
+        var(--skewed-color, white) 60%,
+        rgba(255, 255, 255, 0) 90%
       );
-      z-index: 10;
+      //z-index: 0;
 
       @include m.breakpoint(md-mobile) {
         bottom: 2.4vw;
         height: 12vw;
       }
     }
+  }
 
-    &.right {
-      &::after,
-      &::before {
-        transform-origin: bottom right;
-        transform: skewY(3deg);
+  &.bottomReverse {
+    margin-bottom: 9vw;
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -9vw;
+      left: 0;
+      width: 100%;
+      height: 9vw;
 
-        @include m.breakpoint(md-mobile) {
-          transform: skewY(0deg);
-        }
-      }
-    }
+      background: linear-gradient(
+        to bottom,
+        var(--skewed-color, white) 60%,
+        rgba(255, 255, 255, 0) 90%
+      );
 
-    &.left {
-      &::after,
-      &::before {
-        transform-origin: bottom left;
-        transform: skewY(-3deg);
 
-        @include m.breakpoint(md-mobile) {
-          transform: skewY(0deg);
-        }
+      @include m.breakpoint(md-mobile) {
+        //bottom: 2.4vw;
+        height: 12vw;
       }
     }
   }
 
-  &.top {
+  &.top {   
+    margin-top: 10vw;
     &::before {
       content: "";
       position: absolute;
-      top: -6vw;
+      top: -4vw;
       left: 0;
       width: 100%;
-      height: 6vw;
-      z-index: 11;
+      height: 10vw;
+   
+      background: linear-gradient(
+        to top,
+        var(--skewed-color, white) 60%,
+        rgba(255, 255, 255, 0) 90%
+      );
 
       @include m.breakpoint(md-mobile) {
-        display: none;
+        //top: 2.4vw;
+        height: 12vw;
       }
     }
+  }
 
-    &::after {
+  &.topReverse{
+    margin-top: 2vw;
+    &::before {
       content: "";
       position: absolute;
       top: -2vw;
       left: 0;
       width: 100%;
-      height: 5vw;
+      height: 15vw;
       background: linear-gradient(
         to bottom,
-        var(--skewed-color, white) 0%,
-        var(--skewed-color, white) 48%,
-        rgba(255, 255, 255, 0) 100%
+        var(--skewed-color, white) 60%,
+        rgba(255, 255, 255, 0) 90%
       );
-      z-index: 10;
+     z-index: 20;
 
       @include m.breakpoint(md-mobile) {
         top: 2.4vw;
         height: 12vw;
       }
     }
+  }
 
-    &.right {
-      &::after,
-      &::before {
-        transform-origin: top right;
-        transform: skewY(3deg);
 
-        @include m.breakpoint(md-mobile) {
-          transform: skewY(0deg);
-        }
+
+  &.right {
+    &::before {
+      transform-origin: top right;
+      transform: skewY(3deg);
+
+      @include m.breakpoint(md-mobile) {
+        transform: skewY(0deg);
       }
     }
 
-    &.left {
-      &::after,
-      &::before {
-        transform-origin: top left;
-        transform: skewY(-3deg);
+    &::after {
+      transform-origin: bottom right;
+      transform: skewY(3deg);
 
-        @include m.breakpoint(md-mobile) {
-          transform: skewY(0deg);
-        }
+      @include m.breakpoint(md-mobile) {
+        transform: skewY(0deg);
+      }
+    }
+  }
+
+  &.left {
+    &::before {
+      transform-origin: top left;
+      transform: skewY(-3deg);
+
+      @include m.breakpoint(md-mobile) {
+        transform: skewY(0deg);
+      }
+    }
+    &::after {
+      transform-origin: bottom left;
+      transform: skewY(-3deg);
+
+      @include m.breakpoint(md-mobile) {
+        transform: skewY(0deg);
       }
     }
   }

@@ -1,8 +1,8 @@
+
+
+'use client'
 import React from 'react'
-
-type Props = {}
-
-function SpeleoActivity({}: Props) {
+function SpeleoActivity() {
   return (
     <div>speleo</div>
   )

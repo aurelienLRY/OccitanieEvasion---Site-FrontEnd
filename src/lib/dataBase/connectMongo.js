@@ -23,7 +23,7 @@ if (!cached) {
 }
 
 export async function connectDB() {
-  if (cached.conn) {
+  if (cached.conn && cached.conn.connection.readyState === 1) { // Vérifie si la connexion est ouverte
     console.log('Using cached MongoDB connection');
     return cached.conn;
   }

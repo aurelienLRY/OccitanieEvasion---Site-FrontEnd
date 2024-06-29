@@ -157,11 +157,9 @@
 }
 
 .map-activity {
-  transform: skewY(3deg);
-  overflow: hidden;
   position: relative;
   width: 100%;
-  height: 500px;
+  min-height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -175,7 +173,7 @@
   }
 
   &_content {
-    transform: skewY(-3deg);
+
     padding: 1em;
     display: flex;
     flex-direction: column;
@@ -192,14 +190,9 @@
   }
 
   &_mapConteneur {
-    height: 120%;
-    transform: skewY(-3deg);
     display: flex;
+
     flex: 1 1 55%;
-
-   
-
-
     @include m.breakpoint(tablet) {
       width: 100%;
       max-width: 600px;

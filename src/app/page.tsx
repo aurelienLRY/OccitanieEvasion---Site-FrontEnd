@@ -12,7 +12,7 @@ import useSWR from "swr"; // useSWR is a React Hook for remote data fetching
 
 /* components */
 import ScrollServices from "@/ui/components/scrollServices"; // ScrollServices is a component for scrolling to the services section
-import MapCustomer from "@/ui/components/mapCustomer"; // MapCustomer is a component for displaying the map of the spots
+//import MapCustomer from "@/ui/components/mapCustomer"; // MapCustomer is a component for displaying the map of the spots
 import MapSkeleton from "@/ui/components/mapCustomer/mapSkeleton"; // MapSkeleton is a component for displaying a skeleton of the map
 
 
@@ -26,10 +26,23 @@ import {
 /* Module typescript */
 import { ISpots } from "@/lib/dataBase/models/types";
 
+import dynamic from "next/dynamic";
+
+
+const MapCustomer = dynamic(() => import("@/ui/components/mapCustomer"), {
+  ssr: false,
+  loading: () => <MapSkeleton />,
+}
+
+);
 
 
 export default function Home() {
   const { data, error , isLoading } = useSWR<ISpots>("/getSpots", fetcher);
+
+  if (error) return <p>Erreur lors du chargement des spots: {error.message}</p>;
+
+
   return (  
     <>
       <section className="you-welcome ">
@@ -110,10 +123,8 @@ export default function Home() {
         <h2 className="title">Les lieux de pratiques</h2>
         {isLoading ? (
           <MapSkeleton />
-        ) : error ? (
-          <p>Erreur lors du chargement des spots: {error.message}</p>
-        ) : (
-          <MapCustomer spots={data} />
+        )  : (
+          <MapCustomer spots={data ?? null} />
         )}
 
         <p>

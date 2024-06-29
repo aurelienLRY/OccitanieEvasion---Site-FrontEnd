@@ -1,12 +1,15 @@
+"use client";
+
 /*
  * src/ui/components/mapCustomer/index.tsx
  * Component to display a map with markers for each spot
  * code: @aurelienLRY
  */
 
-"use client";
+
 /* librairie react */
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import Link from 'next/link';
 /* librairie leaflet */
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -16,11 +19,21 @@ import "./mapCustomer.scss";
 /* Types */
 import { ISpots, ISpot } from "@/lib/dataBase/models/types";
 
+
 /**
  * Component to display a map with markers for each spot.
  * @param spots - The spots to be displayed on the map.
  */
 function MapCustomer({ spots }: { spots: ISpots | null }) {
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      console.log('window is defined');
+    }
+    // Retourner undefined au lieu de null
+    return undefined;
+  }, []);
+
   const SetViewComponent = ({ spots }: { spots: ISpots }) => {
     const map = useMap();
     useEffect(() => {
@@ -32,10 +45,10 @@ function MapCustomer({ spots }: { spots: ISpots | null }) {
     return null;
   };
 
-  if (spots === null) return null;
 
+if (spots === null) return null;
   return (
-    <MapContainer center={[0, 0]} zoom={10} className="map-customer">
+    <MapContainer center={[0, 0]} zoom={10} className="map-customer" >
       <SetViewComponent spots={spots} />
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {spots.map((spot: ISpot) => (
@@ -60,6 +73,10 @@ function MapCustomer({ spots }: { spots: ISpots | null }) {
               {spot.description && (
                 <div className="content">{spot.description}</div>
               )}
+            </div>
+            <div className="tooltip-footer">
+              <Link href="#" className="btn-secondary-outline small">En savoir plus</Link>
+              <Link href="#" className="btn-outline small">Réserver</Link>
             </div>
           </Popup>
         </Marker>

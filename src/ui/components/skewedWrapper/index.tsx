@@ -10,11 +10,13 @@ import styles from './skewed.module.scss';
 
 interface SkewedWrapperProps {
   direction: 'right' | 'left';
-  bottom: boolean;
-  top: boolean;
+  bottom?: boolean;
+  top?: boolean;
   children: React.ReactNode;
   backgroundColor?: string;
   skewedColor?: string;
+  topReverse?: boolean;
+  bottomReverse?: boolean;
 }
 /**
  * SkewedWrapper component.
@@ -29,9 +31,9 @@ interface SkewedWrapperProps {
  * @param {string} [props.skewedColor='white'] - The color of the skew.
  * @returns {JSX.Element} The SkewedWrapper component.
  */
-const SkewedWrapper: React.FC<SkewedWrapperProps> = ({ direction, children, bottom, top, backgroundColor = 'transparent', skewedColor = 'white' }) => {
+const SkewedWrapper: React.FC<SkewedWrapperProps> = ({ direction, children, bottom = false, top = false, topReverse = false , bottomReverse = false ,  backgroundColor = 'transparent', skewedColor = 'white' }) => {
   return (
-    <div className={`${styles.skewed} ${styles[direction]} ${bottom ? styles.bottom : ''} ${top ? styles.top : ''}  `} style={{ backgroundColor, '--skewed-color': skewedColor } as React.CSSProperties}>
+    <div className={`${styles.skewed} ${styles[direction]} ${bottom && styles.bottom } ${top && styles.top }  ${topReverse && styles.topReverse} ${bottomReverse && styles.bottomReverse}  `} style={{ backgroundColor, '--skewed-color': skewedColor } as React.CSSProperties}>
       <div className={styles['skewed-content']}>
         {children}
       </div>
