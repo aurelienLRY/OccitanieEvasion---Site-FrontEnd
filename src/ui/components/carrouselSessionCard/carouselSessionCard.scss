@@ -1,25 +1,32 @@
 @use "../../../ui/styles/abstracts/variables" as v;
+@use "../../../ui/styles/abstracts/mixins" as m;
 
 .carousel-sessionCard {
-    width: 100%;
-    box-sizing: border-box;
-    position: relative;
+  width: 100%;
 
-    display : flex;
-    align-items: center;
-    justify-content: center;
+  box-sizing: border-box;
+  position: relative;
 
-.svg{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .svg {
     cursor: pointer;
     width: 50px;
     height: 50px;
-    transition: all 0.250s ease-in-out;
+    transition: all 0.25s ease-in-out;
 
     &:hover {
-        color: v.$primary-color-600;
+      color: v.$primary-color-600;
     }
-}
-.btnNext{
+
+    @include m.breakpoint("desktop") {
+      width: 35px;
+      height: 35px;
+    }
+  }
+  .btnNext {
     position: absolute;
     top: 50%;
     right: 15%;
@@ -29,9 +36,20 @@
     color: white;
     font-size: 2em;
     cursor: pointer;
-   // z-index: 10;
-}
-.btnPrev{
+    // z-index: 10;
+    @include m.breakpoint("large-desktop") {
+      right: 7%;
+    }
+
+    @include m.breakpoint("desktop") {
+      right: 5%;
+    }
+
+    @include m.breakpoint("md-mobile") {
+      display: none;
+    }
+  }
+  .btnPrev {
     position: absolute;
     top: 50%;
     left: 15%;
@@ -41,49 +59,70 @@
     color: white;
     font-size: 2em;
     cursor: pointer;
-   // z-index: 10;
-
+    // z-index: 10;
+    @include m.breakpoint("large-desktop") {
+      left: 7%;
+    }
+    @include m.breakpoint("desktop") {
+      left: 5%;
+    }
+    @include m.breakpoint("md-mobile") {
+      display: none;
+    }
+  }
 }
-}
 
-.activity-session_card{
-    min-width: 300px;
-    width: 85%;
-    max-width: 900px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
+.activity-session_card {
+  min-width: 300px;
+  width: 85%;
+  max-width: 900px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1.5em;
+ scroll-behavior: smooth;
 
+  @include m.breakpoint("desktop") {
+    justify-content: center;
+    width: 100%;
+    gap: 1em;
+  }
+
+  @include m.breakpoint("tablet") {
+    width: 100%;
+    flex-direction: column;
+  }
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 /* carouselSessionCard.scss */
 
+.btnPrev,
+.btnNext {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 
-  
-  .btnPrev,
-  .btnNext {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .carousel-dots {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-  }
-  
-  .dot {
-    width: 10px;
-    height: 10px;
-    background-color: #ccc;
-    border-radius: 50%;
-  }
-  
-  .dot.active {
-    background-color: #333;
-  }
-  
+.carousel-dots {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+
+.dot.active {
+  background-color: v.$primary-color-600;
+}

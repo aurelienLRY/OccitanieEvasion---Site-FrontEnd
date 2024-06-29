@@ -78,7 +78,6 @@
   align-items: center;
   gap: 2.5em;
   background-color: v.$secondary-color-400;
-  transform: skewY(-3deg);
   padding: 1em 2em;
 
   .svg-background {
@@ -99,7 +98,6 @@
     font-size: 4rem;
     font-weight: 700;
     color: white;
-    transform: skewY(3deg);
   }
   &_text {
     z-index: 10;
@@ -115,7 +113,7 @@
     justify-content: space-around;
     gap: 3em;
 
-    transform: skewY(3deg);
+
     @include m.breakpoint("tablet") {
       flex-direction: column;
       gap: 1em;
@@ -137,7 +135,6 @@
 .booking {
   box-sizing: border-box;
   width: 80%; 
-  transform: skewY(3deg);
   padding: 1em;
 
   display: flex;
@@ -170,12 +167,28 @@
   align-items: center;
   background-color: v.$secondary-color-400;
 
+  @include m.breakpoint(tablet) {
+    flex-direction: column;
+    height: max-content;
+    gap: 1em;
+ padding: 2em 0em;
+  }
+
   &_content {
     transform: skewY(-3deg);
     padding: 1em;
     display: flex;
     flex-direction: column;
     flex: 1 1 45%;
+    text-justify: inter-word;
+    h2{
+      width: 100%;
+      text-align: center;
+    }
+    @include m.breakpoint(tablet) {
+      flex: 1 1 100%;
+      align-items: center;
+    }
   }
 
   &_mapConteneur {
@@ -183,6 +196,16 @@
     transform: skewY(-3deg);
     display: flex;
     flex: 1 1 55%;
+
+   
+
+
+    @include m.breakpoint(tablet) {
+      width: 100%;
+      max-width: 600px;
+      height: 60vw;
+      flex: 1 1 100%;
+    }
   }
 }
 

@@ -31,7 +31,7 @@ export interface ISpot {
     description: string;
     gpsCoordinates: string;
     practicedActivities: Array<{activityName: string, activityId: string}>;
-    photos: Map<string,string>;
+    photo: string;
     half_day: boolean;
     full_day: boolean;
     max_OfPeople: number;

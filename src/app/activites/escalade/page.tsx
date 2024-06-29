@@ -8,15 +8,16 @@ import findSpotsByActivity from "@/lib/middleware/findSpotsByActivity";
 
 /* Components */
 import SgvEscalade from "@/ui/components/svgEscaladeGrandVoie";
-import dynamic from 'next/dynamic';
+import MapCustomer from "@/ui/components/mapCustomer";
 import FormulasCard from "@/ui/components/fomulasCard";
 import ActivityCard from "@/ui/components/activityCard";
-import ParaBanner from "./parallaxBanner";
+import SkewedWrapper from "@/ui/components/skewedWrapper";
+
+import ParallaxBanner from "@/ui/components/parallaxBanner";
 import CarouselSession from "@/ui/components/carrouselSessionCard";
 
 /* Styles */
 import "./escalade.scss";
-import { BackgroundSvg, TachClipPath } from "@/ui/svg";
 
 /* Données */
 const itemsFormulas = [
@@ -43,6 +44,15 @@ const itemsFormulas = [
   },
 ];
 
+const itemsParallaxBanner = 
+  {
+    urlBack: "/img/pexels-pixabay-461593.jpg",
+    urlFront: "/img/pexels-pixabay-461593 front.png",
+    alt: "personne qui pratique l'escalade",
+    title: "Escalade",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi veritatis quod molestias assumenda.",
+  };
+
 const fetchData = async () => {
   try {
     await connectDB(); // Connexion à la base de données
@@ -50,20 +60,24 @@ const fetchData = async () => {
     const filteredSpots = await findSpotsByActivity("Escalade");
     return { sessions, filteredSpots };
   } catch (error) {
-    console.error("Failed to load data:>>>>>>>>>>>", error);
+    console.error("Failed to load data:", error);
     return { sessions: null, filteredSpots: null };
   } finally {
     disconnectDB(); // Déconnexion de la base de données
   }
 };
 
-const MapCustomer = dynamic(() => import('@/ui/components/mapCustomer'), { ssr: false });
+
 
 async function EscaladeActivity() {
   const { sessions, filteredSpots } = await fetchData();
   return (
     <main className="escalade-activity">
-      <ParaBanner />
+      <SkewedWrapper direction="left" bottom={true} top={false} >
+        <ParallaxBanner item={itemsParallaxBanner} />
+      </SkewedWrapper>
+
+
       <section className="introduction-activity">
         <ActivityCard
           url="/img/escalade/Escalade-5.jpg"
@@ -87,7 +101,10 @@ async function EscaladeActivity() {
           </p>
         </ActivityCard>
       </section>
+
+      
       <section className="activity-formulas relative">
+      <SkewedWrapper direction="right" bottom={true} top={true}  skewedColor={'--secondary-color'}>
         <SgvEscalade className="svg-background" />
         <article>
           <h2 className="activity-formulas_title">Nos formules</h2>
@@ -110,8 +127,10 @@ async function EscaladeActivity() {
               </>
             )}
           </div>
-        </aside>
+        </aside>      
+        </SkewedWrapper>
       </section>
+
       <section className="activity-tof"></section>
       <section className="map-activity">
         <div className="map-activity_content">

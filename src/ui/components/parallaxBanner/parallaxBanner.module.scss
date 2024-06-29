@@ -1,0 +1,47 @@
+.parallaxBanner {
+    width: 100%;
+    height: 100%;
+}
+
+.bannerText {
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: slide-right 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    color: white;
+
+    .bannerTitle {
+        font-size: 10rem;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .bannerDescription {
+        width: 70%;
+        font-size: 1.5rem;
+        font-weight: 400;
+        text-align: center;
+    }
+}
+
+
+
+
+
+
+  
+  @keyframes slide-right {
+    0% {
+      -webkit-transform: translateX(-200%);
+      transform: translateX(-200%);
+    }
+    100% {
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+    }
+  }
+  

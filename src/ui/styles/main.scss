@@ -66,3 +66,24 @@ h3{
 h4 {
   font-size: v.$fontSize*1.3 ;
 }
+
+
+// Définir les variables CSS dans :root
+:root {
+  --primary-color: #0264a5;
+  --primary-color-dark: darken(#0264a5, 10%);
+  --primary-color-light: lighten(#0264a5, 10%);
+  --secondary-color: #f57625;
+  --secondary-color-dark: darken(#f57625, 10%);
+  --secondary-color-light: lighten(#f57625, 10%);
+  --background-light: #ffffff;
+  --background-medium: darken(#ffffff, 10%);
+  --background-dark: darken(darken(#ffffff, 10%), 10%);
+  --grey: #52576a;
+  --grey-100: darken(#52576a, 2%);
+  --success-color: #579b81;
+  --warning-color: #d79042;
+  --danger-color: #ec3d29;
+  --info-color: rgb(23, 162, 184);
+  // Ajoutez d'autres variables de couleur ici
+}

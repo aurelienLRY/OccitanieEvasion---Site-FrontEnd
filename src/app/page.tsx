@@ -1,11 +1,36 @@
-import Image from "next/image";
-import Link from "next/link";
+/* 
+* @/app/page.tsx
+* @description : This is the home page of the website
+* code : @aurelienLRY
+*/
 
-import ScrollServices from "@/ui/components/scrollServices";
-import { IconEscalade, IconSpeleo, IconViaCorda , IconCanyoning } from "@/ui/svg";
+"use client";
+/* librairies */
+import Image from "next/image"; // Image is a component for displaying images
+import Link from "next/link"; // Link is a component for linking to other pages
+import useSWR from "swr"; // useSWR is a React Hook for remote data fetching
+
+/* components */
+import ScrollServices from "@/ui/components/scrollServices"; // ScrollServices is a component for scrolling to the services section
+import MapCustomer from "@/ui/components/mapCustomer"; // MapCustomer is a component for displaying the map of the spots
+import MapSkeleton from "@/ui/components/mapCustomer/mapSkeleton"; // MapSkeleton is a component for displaying a skeleton of the map
+
+
+import {
+  IconEscalade,
+  IconSpeleo,
+  IconViaCorda,
+  IconCanyoning,
+} from "@/ui/svg"; // IconEscalade, IconSpeleo, IconViaCorda, IconCanyoning are components for displaying the icons of the activities
+
+/* Module typescript */
+import { ISpots } from "@/lib/dataBase/models/types";
+
+
 
 export default function Home() {
-  return (
+  const { data, error , isLoading } = useSWR<ISpots>("/getSpots", fetcher);
+  return (  
     <>
       <section className="you-welcome ">
         <div className="you-welcome-text">
@@ -14,7 +39,7 @@ export default function Home() {
             Occitanie Évasion !
           </h2>
           <h3 className="title-sub">
-            Évadez-vous en pleine nature au coeur de l’Occitanie.
+            Évadez-vous en pleine nature au coeur de l&apos;Occitanie.
           </h3>
         </div>
         <div className="banner-home-page skewedBottomRight">
@@ -29,16 +54,16 @@ export default function Home() {
 
       <section>
         <p>
-          Spécialisés dans l’encadrement et la découverte des sports de plein
-          air, je vous propose une évasion adaptée à vos envies. Que ce soit en
-          Canyoning, Escalade, Spéléo ou Via Corda, c’est avec passion que je
-          vous ferai découvrir ces activités.
+          Spécialisés dans l&apos;encadrement et la découverte des sports de
+          plein air, je vous propose une évasion adaptée à vos envies. Que ce
+          soit en Canyoning, Escalade, Spéléo ou Via Corda, c&apos;est avec
+          passion que je vous ferai découvrir ces activités.
         </p>
         <p>
-          Entre l’Aude, le Tarn, les Pyrénées Orientales et l’Hérault, le choix
-          peut être difficile à faire au vu de la richesse sauvage de ce vaste
-          territoire. Vous trouverez ici une sélection de sites naturels et
-          lieux de pratique que j’affectionne particulièrement.
+          Entre l&apos;Aude, le Tarn, les Pyrénées Orientales et l&apos;Hérault,
+          le choix peut être difficile à faire au vu de la richesse sauvage de
+          ce vaste territoire. Vous trouverez ici une sélection de sites
+          naturels et lieux de pratique que j&apos;affectionne particulièrement.
         </p>
       </section>
 
@@ -51,14 +76,14 @@ export default function Home() {
           </Link>
 
           <Link href="/activites/canyoning" className="branding-svg">
-            <IconCanyoning className="hover"/>
+            <IconCanyoning className="hover" />
           </Link>
-          <div className="branding-svg">
+          <Link href="/activites/speleo" className="branding-svg">
             <IconSpeleo className=" hover" />
-          </div>
-          <div className="branding-svg">
+          </Link>
+          <Link href="/activites/via-corda" className="branding-svg">
             <IconViaCorda className="hover" />
-          </div>
+          </Link>
         </div>
       </section>
 
@@ -68,12 +93,12 @@ export default function Home() {
         <div className="content">
           <h2 className="title">Occitanie Evasion Qu&eacute;s aco&rsquo;?</h2>
           <p className="text">
-            Chez Occitanie Évasion, nous croyons en l&rsquo;importance de
-            partager des moments authentiques. Une ambiance conviviale et en
-            toute sécurité, au coeur de la nature pour faire le plein de
-            sensations, de découvertes et d’échanges . Tout en prenant le temps,
-            nous veillons à ce que chaque sortie soit un plaisir, tant pour vous
-            que pour nous…
+            Chez Occitanie Évasion, nous croyons en l&apos;importance de partager des
+            moments authentiques. Une ambiance conviviale et en toute sécurité,
+            au coeur de la nature pour faire le plein de sensations, de
+            découvertes et d&apos;échanges . Tout en prenant le temps, nous veillons
+            à ce que chaque sortie soit un plaisir, tant pour vous que pour
+            nous…
           </p>
           <Link href="/apropos" className="btn small">
             En savoir plus
@@ -83,6 +108,14 @@ export default function Home() {
 
       <section>
         <h2 className="title">Les lieux de pratiques</h2>
+        {isLoading ? (
+          <MapSkeleton />
+        ) : error ? (
+          <p>Erreur lors du chargement des spots: {error.message}</p>
+        ) : (
+          <MapCustomer spots={data} />
+        )}
+
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, rem
           obcaecati cumque ipsum inventore iure perferendis? Eveniet,
@@ -93,3 +126,7 @@ export default function Home() {
     </>
   );
 }
+
+
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());

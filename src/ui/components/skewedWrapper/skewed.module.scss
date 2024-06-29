@@ -1,0 +1,139 @@
+@use "../../styles/abstracts/variables" as v;
+@use "../../styles/abstracts/mixins" as m;
+
+.skewed {
+  position: relative;
+  width: 100%;
+  background-color: var(--background-color, white); // Utilisation de la variable CSS
+
+  .skewed-content {
+    transform: skewY(0deg);
+  }
+
+  &::before,
+  &::after {
+    background: var(--skewed-color, white); // Utilisation de la variable CSS pour les éléments skewed
+  }
+
+  &.bottom {
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: -6vw;
+      left: 0;
+      width: 100%;
+      height: 6vw;
+      z-index: 11;
+
+      @include m.breakpoint(md-mobile) {
+        display: none;
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -2vw;
+      left: 0;
+      width: 100%;
+      height: 5vw;
+      background: linear-gradient(
+        to top,
+        var(--skewed-color, white) 0%,
+        var(--skewed-color, white) 48%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      z-index: 10;
+
+      @include m.breakpoint(md-mobile) {
+        bottom: 2.4vw;
+        height: 12vw;
+      }
+    }
+
+    &.right {
+      &::after,
+      &::before {
+        transform-origin: bottom right;
+        transform: skewY(3deg);
+
+        @include m.breakpoint(md-mobile) {
+          transform: skewY(0deg);
+        }
+      }
+    }
+
+    &.left {
+      &::after,
+      &::before {
+        transform-origin: bottom left;
+        transform: skewY(-3deg);
+
+        @include m.breakpoint(md-mobile) {
+          transform: skewY(0deg);
+        }
+      }
+    }
+  }
+
+  &.top {
+    &::before {
+      content: "";
+      position: absolute;
+      top: -6vw;
+      left: 0;
+      width: 100%;
+      height: 6vw;
+      z-index: 11;
+
+      @include m.breakpoint(md-mobile) {
+        display: none;
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -2vw;
+      left: 0;
+      width: 100%;
+      height: 5vw;
+      background: linear-gradient(
+        to bottom,
+        var(--skewed-color, white) 0%,
+        var(--skewed-color, white) 48%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      z-index: 10;
+
+      @include m.breakpoint(md-mobile) {
+        top: 2.4vw;
+        height: 12vw;
+      }
+    }
+
+    &.right {
+      &::after,
+      &::before {
+        transform-origin: top right;
+        transform: skewY(3deg);
+
+        @include m.breakpoint(md-mobile) {
+          transform: skewY(0deg);
+        }
+      }
+    }
+
+    &.left {
+      &::after,
+      &::before {
+        transform-origin: top left;
+        transform: skewY(-3deg);
+
+        @include m.breakpoint(md-mobile) {
+          transform: skewY(0deg);
+        }
+      }
+    }
+  }
+}

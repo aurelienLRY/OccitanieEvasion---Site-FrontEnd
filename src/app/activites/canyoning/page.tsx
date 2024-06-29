@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Canyoning",
+    title: "Canyoning ",
     description: "Découvrez le canyoning avec notre équipe de professionnels",
     };
 
@@ -10,7 +10,9 @@ export const metadata: Metadata = {
 
 function CanyoningActivity() {
   return (
-    <div>CanyoningPage</div>
+    <main className="canyoning-activity">
+      
+    </main>
   )
 }
 

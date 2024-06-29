@@ -23,9 +23,11 @@
     "react-dom": "^18",
     "react-icons": "^5.2.1",
     "react-leaflet": "^4.2.1",
+    "react-loading-skeleton": "^3.4.0",
     "react-scroll-parallax": "^3.4.5",
     "sass": "^1.77.1",
     "svgo": "^3.3.2",
+    "swr": "^2.2.5",
     "use-places-autocomplete": "^4.0.1"
   },
   "devDependencies": {
